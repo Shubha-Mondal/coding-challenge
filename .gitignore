@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CodingChallenge/CodingChallenge/obj
+/CodingChallenge/.vs/CodingChallenge
+/.vs
+/CodingChallenge/CodingChallenge.Test/bin/Debug/net7.0
+/CodingChallenge/CodingChallenge.Test/obj
+/CodingChallenge/CodingChallenge.Test/__snapshots__
+/CodingChallenge/CodingChallenge/bin/Debug/net7.0
+/CodingChallenge/CodingChallenge/Migrations
+/CodingChallenge/.vs/ProjectEvaluation
