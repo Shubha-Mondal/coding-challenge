@@ -1,4 +1,5 @@
 ﻿using CodingChallenge.Data;
+using CodingChallenge.GraphQL;
 using HotChocolate;
 using HotChocolate.Execution;
 using Microsoft.Extensions.DependencyInjection;
