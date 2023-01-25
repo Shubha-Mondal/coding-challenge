@@ -1,0 +1,72 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    function btnSubmitClick() {
+        var latitude = $('#latitude').val();
+        var longitude = $('#longitude').val();
+        if (latitude != '' && longitude != '') {
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:7298/graphql",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    query: 'query{officesByLocation(latitude: ' + latitude + ', longitude:' + longitude + ', radiusInKM: 20){id,name,city,email,latitude,longitude}}',
+
+                }),
+                success: function (result) {
+                    $('#tableBody').empty();
+                    var html = '';
+                    $.each(result.data.officesByLocation, function (i, item) {
+                        html += '<tr><td>' + item.name + '</td><td>' + item.city + '</td><td>' + item.email + '</td><td>' + item.latitude + '</td><<td>' + item.longitude + '</td>/tr>';
+                    });
+                    $('#tableBody').append(html);
+                },
+                error: function (request, status, errorThrown) {
+                    console.log(request);
+                    console.log(status);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    }
+    $(document).ready(function () {
+
+    });
+</script>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Latitude" id="latitude">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Longitude" id="longitude">
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="btnSubmitClick()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
